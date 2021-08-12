@@ -1,6 +1,6 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :destroy]
-  before_action :visit_root, only: :edit
+  before_action :visit_root, only: :edit, unless: :user_signed_in?
   
   def index
     @prototypes = Prototype.all
