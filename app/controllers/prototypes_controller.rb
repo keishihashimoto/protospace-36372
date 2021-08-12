@@ -27,6 +27,7 @@ class PrototypesController < ApplicationController
 
   def edit
     @prototype = Prototype.find(params[:id])
+    redirect_others(@prototype)
   end
 
   def update
@@ -52,6 +53,12 @@ class PrototypesController < ApplicationController
 
   def visit_root
     redirect_to action: :index
+  end
+
+  def redirect_others(prototype)
+    if current_user.id != prototype.user_id
+      redirect_to root_path
+    end
   end
 
 end
